@@ -1,5 +1,5 @@
 function updateTime(cityElement) {
-    const timezone = cityElement.dataset.timezone;
+    const timezone = cityElement.dataset.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone;
     const now = new Date();
 
     const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: timezone };
