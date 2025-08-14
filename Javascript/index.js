@@ -1,5 +1,16 @@
+// Detect user's local timezone
+const localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+const localCityName = "Current Location";
+
+// Add it to the top of the dropdown
+const citySelect = document.getElementById("citySelect");
+const localOption = document.createElement("option");
+localOption.value = localTimezone;
+localOption.textContent = localCityName;
+citySelect.insertBefore(localOption, citySelect.firstChild);
+
 function updateTime(cityElement) {
-    const timezone = cityElement.dataset.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const timezone = cityElement.dataset.timezone;
     const now = new Date();
 
     const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: timezone };
@@ -9,21 +20,20 @@ function updateTime(cityElement) {
     cityElement.querySelector(".date").textContent = new Intl.DateTimeFormat("en-US", optionsDate).format(now);
 }
 
-// Update all cities every second
 function startUpdatingTimes() {
     document.querySelectorAll(".city").forEach(city => updateTime(city));
 }
 
-document.getElementById("citySelect").addEventListener("change", function () {
+citySelect.addEventListener("change", function () {
     const timezone = this.value;
     const cityName = this.options[this.selectedIndex].text;
 
     if (!timezone) {
-        this.value = ""; // Reset dropdown
+        this.value = "";
         return;
     }
 
-    // Prevent duplicate cities
+    // Prevent duplicates
     if (document.querySelector(`.city[data-timezone="${timezone}"]`)) {
         alert(`${cityName} is already in the list!`);
         this.value = "";
@@ -43,9 +53,9 @@ document.getElementById("citySelect").addEventListener("change", function () {
     `;
 
     document.getElementById("citiesContainer").appendChild(cityDiv);
-    this.value = ""; // Reset dropdown
+    this.value = "";
 });
 
-// Start the clock immediately and keep updating every second
+
 startUpdatingTimes();
 setInterval(startUpdatingTimes, 1000);
