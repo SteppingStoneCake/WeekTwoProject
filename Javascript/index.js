@@ -1,5 +1,7 @@
-function updateTime(cityElement, timezone) {
+function updateTime(cityElement) {
+    const timezone = cityElement.dataset.timezone;
     const now = new Date();
+
     const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: timezone };
     const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: timezone };
 
@@ -7,17 +9,31 @@ function updateTime(cityElement, timezone) {
     cityElement.querySelector(".date").textContent = new Intl.DateTimeFormat("en-US", optionsDate).format(now);
 }
 
+// Update all cities every second
+function startUpdatingTimes() {
+    document.querySelectorAll(".city").forEach(city => updateTime(city));
+}
+
 document.getElementById("citySelect").addEventListener("change", function () {
     const timezone = this.value;
     const cityName = this.options[this.selectedIndex].text;
 
-    if (!timezone) return;
+    if (!timezone) {
+        this.value = ""; // Reset dropdown
+        return;
+    }
 
-    const citiesContainer = document.getElementById("citiesContainer");
+    // Prevent duplicate cities
+    if (document.querySelector(`.city[data-timezone="${timezone}"]`)) {
+        alert(`${cityName} is already in the list!`);
+        this.value = "";
+        return;
+    }
 
-    // Create city element
+    // Create a new city block
     const cityDiv = document.createElement("div");
     cityDiv.classList.add("city");
+    cityDiv.dataset.timezone = timezone;
     cityDiv.innerHTML = `
         <div class="city-header">
             <h2>${cityName}</h2>
@@ -26,9 +42,10 @@ document.getElementById("citySelect").addEventListener("change", function () {
         <div class="date"></div>
     `;
 
-    citiesContainer.appendChild(cityDiv);
-
-    // Update time immediately and every second
-    updateTime(cityDiv, timezone);
-    setInterval(() => updateTime(cityDiv, timezone), 1000);
+    document.getElementById("citiesContainer").appendChild(cityDiv);
+    this.value = ""; // Reset dropdown
 });
+
+// Start the clock immediately and keep updating every second
+startUpdatingTimes();
+setInterval(startUpdatingTimes, 1000);
