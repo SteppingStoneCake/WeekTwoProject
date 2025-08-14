@@ -3,39 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>World Clock- Monica Privett</title>
-    <link rel="stylesheet" href="css/style.css"/>
+    <title>World Clock - Monica Privett</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="Container">
-   <h1> World Clock</h1> 
-   <select>
-    <option value=""">Select a City</option>
-        <option value="">New York</option>
-         <option value="">Los Angelos</option>  
-        <option value="">New Orleans</option>
-         <option value="">Phoenix</option>
-         <option value="">Aukland</option>
-         <option value="">Tokyo</option>
-   </select>
-   <div class="City">
-    <h2>
-        Los Angelos
-    </h2>
-    <div class="date"> August 13, 2025</div>
-    <div class="Time"></div>
-   </div>
-    <div class="City">
-    <h2>
-        New Orleans
-    </h2>
-    <div class="date"> August 13, 2025</div>
-    <div class="Time"></div>
-   </div>
-</div>
-   <footer>
-    This project was coded by Monica Privett and is open sourced on <a href="https://github.com/SteppingStoneCake">Github</a>
-   </footer>
-   <script src="Javascript/index.js"></script>
+    <div class="container">
+        <h1>World Clock</h1> 
+        <select id="citySelect">
+            <option value="">Select a City</option>
+            <option value="America/New_York">New York</option>
+            <option value="America/Los_Angeles">Los Angeles</option>
+            <option value="America/Chicago">New Orleans</option>
+            <option value="America/Phoenix">Phoenix</option>
+            <option value="Pacific/Auckland">Auckland</option>
+            <option value="Asia/Tokyo">Tokyo</option>
+        </select>
+
+        <div class="city">
+            <h2>Los Angeles</h2>
+            <div class="date"></div>
+            <div class="time"></div>
+        </div>
+        <div class="city">
+            <h2>New Orleans</h2>
+            <div class="date"></div>
+            <div class="time"></div>
+        </div>
+    </div>
+
+    <footer>
+        This project was coded by Monica Privett and is open sourced on 
+        <a href="https://github.com/SteppingStoneCake">Github</a>
+    </footer>
+    
+    <script src="javascript/index.js"></script>
 </body>
 </html>
