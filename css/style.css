@@ -1,24 +1,25 @@
 body {
-    background-color: #f0f0f0; /* Light gray background */
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
 }
 
 .container {
     text-align: center;
     max-width: 600px;
     margin: 0 auto;
-    background-color: white; /* White background for the container */
-    padding: 20px; /* Add some padding */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 select {
-    width: 100%; /* Make the dropdown full width */
-    padding: 10px; /* Add some padding */
-    border: 1px solid #ccc; /* Light border */
-    border-radius: 4px; /* Rounded corners */
-    font-size: 16px; /* Larger font for better readability */
-    margin-bottom: 20px; /* Space between dropdown and city info */
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-bottom: 20px;
 }
 
 h1 {
@@ -26,28 +27,40 @@ h1 {
 }
 
 .city {
-    border: 1px solid #ccc; /* Light border */
-    padding: 15px; /* Padding around the content */
-    margin-bottom: 10px; /* Space between city sections */
-    border-radius: 4px; /* Rounded corners */
-    background-color: #fafafa; /* Light background for each city */
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    background-color: #fafafa;
 }
 
-.city h2 {
-    margin: 0; /* Remove default margin */
-    font-size: 24px; /* Larger font size for city names */
+.city-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.city-header h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.time {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
 }
 
 .date {
-    font-size: 14px; /* Smaller font for the date */
-    color: #666; /* Gray color for the date */
+    font-size: 14px;
+    color: #666;
 }
 
 footer {
     text-align: center;
-    padding: 10px 0; /* Padding for the footer */
-    border-top: 1px solid #ccc; /* Top border */
-    margin-top: 20px; /* Space above footer */
-    font-size: 14px; /* Smaller font size */
-    color: #666; /* Gray text color */
+    padding: 10px 0;
+    border-top: 1px solid #ccc;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
 }
