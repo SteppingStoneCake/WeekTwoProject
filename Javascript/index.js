@@ -1,61 +1,60 @@
-// Detect user's local timezone
-const localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-const localCityName = "Current Location";
+ const citySelect = document.getElementById("citySelect");
+        const citiesContainer = document.getElementById("citiesContainer");
 
-// Add it to the top of the dropdown
-const citySelect = document.getElementById("citySelect");
-const localOption = document.createElement("option");
-localOption.value = localTimezone;
-localOption.textContent = localCityName;
-citySelect.insertBefore(localOption, citySelect.firstChild);
+        const localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-function updateTime(cityElement) {
-    const timezone = cityElement.dataset.timezone;
-    const now = new Date();
+        function updateTime(cityElement) {
+            let timezone = cityElement.dataset.timezone;
+            if (timezone === "current") timezone = localTimezone;
 
-    const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: timezone };
-    const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: timezone };
+            const now = new Date();
 
-    cityElement.querySelector(".time").textContent = new Intl.DateTimeFormat("en-US", optionsTime).format(now);
-    cityElement.querySelector(".date").textContent = new Intl.DateTimeFormat("en-US", optionsDate).format(now);
-}
+            const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: timezone };
+            const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: timezone };
 
-function startUpdatingTimes() {
-    document.querySelectorAll(".city").forEach(city => updateTime(city));
-}
+            const timeElem = cityElement.querySelector(".time");
+            const dateElem = cityElement.querySelector(".date");
 
-citySelect.addEventListener("change", function () {
-    const timezone = this.value;
-    const cityName = this.options[this.selectedIndex].text;
+            if (timeElem && dateElem) {
+                timeElem.textContent = new Intl.DateTimeFormat("en-US", optionsTime).format(now);
+                dateElem.textContent = new Intl.DateTimeFormat("en-US", optionsDate).format(now);
+            }
+        }
 
-    if (!timezone) {
-        this.value = "";
-        return;
-    }
+        function updateAllTimes() {
+            document.querySelectorAll(".city").forEach(updateTime);
+        }
 
-    // Prevent duplicates
-    if (document.querySelector(`.city[data-timezone="${timezone}"]`)) {
-        alert(`${cityName} is already in the list!`);
-        this.value = "";
-        return;
-    }
+        citySelect.addEventListener("change", function () {
+            const timezone = this.value;
+            const cityName = this.options[this.selectedIndex].text;
 
-    // Create a new city block
-    const cityDiv = document.createElement("div");
-    cityDiv.classList.add("city");
-    cityDiv.dataset.timezone = timezone;
-    cityDiv.innerHTML = `
-        <div class="city-header">
-            <h2>${cityName}</h2>
-            <div class="time"></div>
-        </div>
-        <div class="date"></div>
-    `;
+            if (!timezone) return;
 
-    document.getElementById("citiesContainer").appendChild(cityDiv);
-    this.value = "";
-});
+            
+            if (document.querySelector(`.city[data-timezone="${timezone}"]`)) {
+                alert(`${cityName} is already in the list!`);
+                this.value = "";
+                return;
+            }
 
+            const cityDiv = document.createElement("div");
+            cityDiv.classList.add("city");
+            cityDiv.dataset.timezone = timezone;
 
-startUpdatingTimes();
-setInterval(startUpdatingTimes, 1000);
+            cityDiv.innerHTML = `
+                <div class="city-header">
+                    <h2>${cityName}</h2>
+                    <div class="time"></div>
+                </div>
+                <div class="date"></div>
+            `;
+
+            citiesContainer.appendChild(cityDiv);
+            updateTime(cityDiv); 
+            this.value = "";
+        });
+
+        
+        updateAllTimes();
+        setInterval(updateAllTimes, 1000);
