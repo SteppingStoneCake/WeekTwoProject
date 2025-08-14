@@ -11,6 +11,7 @@ body {
     border-radius: 8px; /* Rounded corners */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
 }
+
 select {
     width: 100%; /* Make the dropdown full width */
     padding: 10px; /* Add some padding */
@@ -19,11 +20,12 @@ select {
     font-size: 16px; /* Larger font for better readability */
     margin-bottom: 20px; /* Space between dropdown and city info */
 }
-h1{
+
+h1 {
     text-align: center;
 }
 
-.City {
+.city {
     border: 1px solid #ccc; /* Light border */
     padding: 15px; /* Padding around the content */
     margin-bottom: 10px; /* Space between city sections */
@@ -31,7 +33,7 @@ h1{
     background-color: #fafafa; /* Light background for each city */
 }
 
-.City h2 {
+.city h2 {
     margin: 0; /* Remove default margin */
     font-size: 24px; /* Larger font size for city names */
 }
